@@ -14,7 +14,7 @@ let phonesFound = false;
 let platesFound = false;
 let badgeFound = false;
 let headFound = false;
-let noteWritten = false;
+let choice = "";
 let noteText = "";
 let noteCount = 0;
 let days = 0;
@@ -45,8 +45,10 @@ function goToScene(number) {
     if (declines > 0) {
       text = text + " You tried to decline " + declines + " time(s). The app didn't let you.";
     }
-    if (noteWritten === true) {
-      text = text + " Your warning was rewritten into an invitation. Someone else will be next.";
+    if (choice === "warn") {
+      text = text + ' Your warning was rewritten into an invitation. Your draft: "' + noteText + '". Sent: "Come in. Please. Alone." Someone else will be next.';
+    } else if (choice === "silent") {
+      text = text + ' You said nothing, so the app spoke for you. Your draft: (empty). Sent: "Come in. Please. Alone." Someone else will be next.';
     }
     document.getElementById("summary").innerHTML = text;
   }
@@ -215,11 +217,28 @@ function waitDay() {
   } else if (days === 2) {
     document.getElementById("dayMsg").innerHTML = "Day 2. The door will not open. Your flight reminder keeps repeating: 9:40 PM, today.";
   } else {
-    document.getElementById("dayMsg").innerHTML = "Day 3. Driver found: new to onemore, first delivery. 2 minutes away. Warn them.";
+    document.getElementById("dayMsg").innerHTML = "Day 3. Driver found: new to onemore, first delivery. 2 minutes away. What do you do?";
     document.getElementById("waitBtn").style.display = "none";
-    document.getElementById("noteArea").style.display = "block";
-    document.getElementById("keyboard").style.display = "block";
+    document.getElementById("choiceArea").style.display = "block";
   }
+}
+
+function chooseWarn() {
+  choice = "warn";
+  document.getElementById("choiceArea").style.display = "none";
+  document.getElementById("dayMsg").innerHTML = "Type a warning before they reach the door.";
+  document.getElementById("noteArea").style.display = "block";
+  document.getElementById("keyboard").style.display = "block";
+}
+
+function chooseSilent() {
+  choice = "silent";
+  document.getElementById("choiceArea").style.display = "none";
+  document.getElementById("dayMsg").innerHTML = "You said nothing. The driver is at the door.";
+  document.getElementById("noteArea").style.display = "block";
+  document.getElementById("noteBox").innerHTML = "(empty)";
+  document.getElementById("noteResult").innerHTML = 'The app filled one in:<br>"Come in. Please. Alone."';
+  document.getElementById("toEnd").style.display = "block";
 }
 
 function showNote() {
@@ -248,7 +267,6 @@ function sendNote() {
   if (noteText === "") {
     document.getElementById("driverMsg").innerHTML = "Type a warning to the driver first.";
   } else {
-    noteWritten = true;
     document.getElementById("keyboard").style.display = "none";
     document.getElementById("noteBox").innerHTML = '"' + noteText + '"';
     document.getElementById("noteResult").innerHTML = 'The app rewrites it:<br>"Come in. Please. Alone."';

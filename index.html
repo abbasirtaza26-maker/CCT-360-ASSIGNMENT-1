@@ -180,6 +180,10 @@
         <p class="addr">14 Hollow Crescent &middot; Finding a driver...</p>
         <p id="dayMsg" class="noteBox">You can't leave. All you can do is wait.</p>
         <button class="acceptBtn wide" id="waitBtn" onclick="waitDay()">Wait</button>
+        <div id="choiceArea" style="display:none">
+          <button class="declineBtn" onclick="chooseSilent()">Stay silent</button>
+          <button class="acceptBtn" onclick="chooseWarn()">Warn them</button>
+        </div>
         <div id="noteArea" style="display:none">
           <p class="appSmall">Note to driver</p>
           <p id="noteBox" class="noteBox">Tap the keys to type a warning...</p>
