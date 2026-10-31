@@ -1,0 +1,775 @@
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  background-color: #050507;
+  color: #e8e2d8;
+}
+
+/* film grain overlay */
+#grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: repeating-radial-gradient(circle at 17% 32%, #ffffff 0, #000000 1px, transparent 2px, transparent 4px);
+  animation: grain 0.6s steps(3) infinite;
+}
+
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-3px, 2px); }
+  66% { transform: translate(2px, -3px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* HUD */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background-color: #000000;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.hudItem b {
+  color: #5dff9a;
+  text-shadow: 0 0 8px #5dff9a;
+}
+
+/* scenes */
+.scene {
+  display: none;
+  padding-top: 42px;
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; filter: blur(6px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* SCENE 1 */
+#scene1 {
+  text-align: center;
+  min-height: 100vh;
+  padding: 70px 16px 40px 16px;
+  background-image: radial-gradient(circle at 50% 20%, #2a0505 0%, #050507 65%);
+}
+
+.kicker {
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: 6px;
+  font-size: 13px;
+  color: #a33;
+  margin-bottom: 0;
+}
+
+h1 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 84px;
+  letter-spacing: 10px;
+  margin: 6px 0;
+  color: #ff2b2b;
+  text-shadow: 0 0 12px #ff2b2b, 0 0 40px #8a0000;
+}
+
+.glitch {
+  animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0, 0); }
+  92% { transform: translate(0, 0); opacity: 1; }
+  93% { transform: translate(-4px, 1px); opacity: 0.7; text-shadow: 3px 0 #00ffff, -3px 0 #ff00ff; }
+  95% { transform: translate(4px, -1px); opacity: 0.9; text-shadow: -3px 0 #00ffff, 3px 0 #ff00ff; }
+  97% { transform: translate(0, 0); opacity: 1; }
+  100% { transform: translate(0, 0); }
+}
+
+.tagline {
+  color: #b8a99a;
+  font-size: 18px;
+  margin-top: 0;
+}
+
+/* lock screen phone (scene 1) */
+.lockphone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  max-width: 100%;
+  min-height: 600px;
+  margin: 28px auto;
+  padding: 40px 14px 20px 14px;
+  box-sizing: border-box;
+  background-image: linear-gradient(170deg, #3b2a63 0%, #1d1535 60%, #120d22 100%);
+  border: 8px solid #0a0a0e;
+  border-radius: 46px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.lockphone::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 90px;
+  height: 24px;
+  margin-left: -45px;
+  background-color: #000000;
+  border-radius: 14px;
+}
+
+.lockphone .big {
+  margin-top: auto;
+}
+
+.lockStatus {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #cfc6e6;
+}
+
+.lockDate {
+  margin: 14px 0 0 0;
+  font-size: 16px;
+  color: #e6dffa;
+}
+
+.lockTime {
+  margin: 0 0 14px 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: #ffffff;
+}
+
+.lockNotif {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 0 0 8px 0;
+  padding: 10px 14px;
+  background-color: rgba(255, 255, 255, 0.16);
+  border: none;
+  border-radius: 18px;
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.nTop {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #d9d1ee;
+}
+
+.lockNotif b {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  font-weight: normal;
+}
+
+#notifDetail {
+  min-height: 56px;
+  margin: 10px 0;
+  color: #ffd9a8;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* the delivery app phone (scenes 2 and 5) */
+.appphone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  max-width: 100%;
+  min-height: 600px;
+  margin: 16px auto 4px auto;
+  padding: 40px 14px 6px 14px;
+  box-sizing: border-box;
+  background-color: #fbf8f7;
+  color: #2b2530;
+  border: 8px solid #0a0a0e;
+  border-radius: 46px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+  font-family: "Times New Roman", Times, serif;
+}
+
+.appphone::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 90px;
+  height: 24px;
+  margin-left: -45px;
+  background-color: #000000;
+  border-radius: 14px;
+}
+
+.appTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: #e8457c;
+}
+
+.ratingPill {
+  padding: 3px 10px;
+  background-color: #1b1b25;
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.appSmall {
+  margin: 12px 0 2px 0;
+  font-size: 12px;
+  color: #8a8290;
+}
+
+.price {
+  margin: 0;
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.dish {
+  margin: 2px 0;
+  font-size: 17px;
+}
+
+.addr {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: #8a8290;
+}
+
+.custNote {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-style: italic;
+  color: #b0305e;
+}
+
+.declineBtn {
+  width: 42%;
+  background-color: #ece8ea;
+  color: #6a6270;
+  border: none;
+  border-radius: 20px;
+}
+
+.acceptBtn {
+  width: 48%;
+  background-color: #e8457c;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+}
+
+.wide {
+  width: 100%;
+  margin: 4px 0;
+}
+
+.roleBadge {
+  background-color: #b01818;
+  letter-spacing: 2px;
+}
+
+.appMsg {
+  min-height: 20px;
+  font-size: 13px;
+  color: #b0305e;
+}
+
+.bubble {
+  margin: 6px 0;
+  padding: 10px 12px;
+  background-color: #ece8ea;
+  border-radius: 14px 14px 14px 2px;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+#appBank {
+  display: none;
+}
+
+#appMessages {
+  display: none;
+}
+
+.appTabs {
+  display: flex;
+  justify-content: space-around;
+  margin-top: auto;
+}
+
+.appTabs button {
+  margin: 0;
+  padding: 10px 8px;
+  background-color: transparent;
+  border: none;
+  color: #999999;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+}
+
+.appTabs button:hover {
+  box-shadow: none;
+}
+
+/* on-phone keyboard (scene 5) */
+.noteBox {
+  min-height: 44px;
+  margin: 0 0 8px 0;
+  padding: 10px 12px;
+  background-color: #ece8ea;
+  border-radius: 14px;
+  font-size: 16px;
+  color: #2b2530;
+}
+
+#keyboard {
+  margin-top: auto;
+}
+
+.kbRow {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 4px;
+}
+
+.kbRow2 {
+  padding: 0 5%;
+}
+
+.kbRow3 {
+  padding: 0 12%;
+}
+
+.key {
+  flex: 1;
+  margin: 0;
+  padding: 10px 0;
+  background-color: #ece8ea;
+  color: #2b2530;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.spaceKey {
+  flex: 3;
+}
+
+.sendKey {
+  background-color: #e8457c;
+  color: #ffffff;
+}
+
+/* stages */
+.stage {
+  position: relative;
+  min-height: 92vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.92) 100%);
+}
+
+.panel {
+  position: relative;
+  z-index: 2;
+  max-width: 580px;
+  width: 100%;
+  padding: 20px 22px;
+  background-color: rgba(8, 8, 12, 0.82);
+  border-radius: 6px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(4px);
+  animation: rise 0.9s ease;
+}
+
+@keyframes rise {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.chapter {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: #ff5050;
+  margin: 0;
+}
+
+h2 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 44px;
+  letter-spacing: 4px;
+  margin: 0 0 8px 0;
+}
+
+button {
+  padding: 10px 16px;
+  margin: 4px 6px 4px 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #17171f;
+  color: #e8e2d8;
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.primary {
+  background-color: #b01818;
+  color: #ffffff;
+  letter-spacing: 2px;
+  animation: pulse 2s infinite;
+}
+
+.big {
+  width: 100%;
+  font-size: 18px;
+  margin-top: 6px;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 43, 43, 0.6); }
+  70% { box-shadow: 0 0 0 14px rgba(255, 43, 43, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 43, 43, 0); }
+}
+
+.alert {
+  color: #ffb36b;
+  min-height: 22px;
+}
+
+/* scene 3 fog */
+.fog {
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, transparent, rgba(180, 190, 210, 0.12), transparent, rgba(180, 190, 210, 0.1), transparent);
+  animation: drift 18s linear infinite;
+}
+
+@keyframes drift {
+  from { transform: translateX(0); }
+  to { transform: translateX(25%); }
+}
+
+/* scene 4 torch + candles */
+.candlelit::before {
+  background-image: none;
+}
+
+#darkness {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-color: transparent;
+  background-image: radial-gradient(circle 140px at 50% 50%, rgba(255, 190, 90, 0.12) 0%, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.97) 100%);
+}
+
+.hint {
+  color: #ffb36b;
+  font-size: 14px;
+}
+
+.candlelit::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 50% 55%, rgba(255, 170, 60, 0.22), transparent 55%);
+  animation: candle 3s infinite alternate;
+}
+
+@keyframes candle {
+  0% { opacity: 0.4; }
+  30% { opacity: 1; }
+  55% { opacity: 0.55; }
+  100% { opacity: 0.9; }
+}
+
+.clue {
+  min-height: 48px;
+  font-size: 18px;
+  color: #ffe6c2;
+}
+
+.hotspot {
+  position: absolute;
+  z-index: 3;
+  width: 15%;
+  height: 16%;
+  min-width: 70px;
+  min-height: 50px;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: transparent;
+  border: 1px dashed rgba(255, 210, 122, 0.15);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.hotspot:hover {
+  color: #ffd27a;
+  border-color: #ffd27a;
+  background-color: rgba(255, 200, 90, 0.08);
+  box-shadow: none;
+}
+
+#toLoop {
+  display: none;
+}
+
+#toEnd {
+  display: none;
+}
+
+/* scene 5 */
+.flicker {
+  animation: lightsOut 6s infinite;
+}
+
+@keyframes lightsOut {
+  0% { filter: brightness(1); }
+  40% { filter: brightness(1); }
+  42% { filter: brightness(0.15); }
+  44% { filter: brightness(1); }
+  46% { filter: brightness(0.3); }
+  50% { filter: brightness(1); }
+  100% { filter: brightness(1); }
+}
+
+/* scene 6 */
+.ending::before {
+  background-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.98) 100%);
+}
+
+.doorbell {
+  color: #ff2b2b;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 30px;
+  letter-spacing: 4px;
+  animation: heartbeat 1.6s infinite;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  10% { transform: scale(1.08); }
+  20% { transform: scale(1); }
+  30% { transform: scale(1.08); }
+  45% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* voice note card (scene 6) */
+.voiceCard {
+  margin: 28px 0;
+  padding: 22px 24px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+}
+
+.voiceHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.avatar {
+  display: block;
+  width: 46px;
+  height: 46px;
+  line-height: 46px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #b0305e;
+  border-radius: 50%;
+}
+
+.voiceWho {
+  font-size: 17px;
+  line-height: 1.4;
+  color: #f1e9df;
+}
+
+.voiceWho i {
+  font-size: 13px;
+  color: #a89f96;
+}
+
+.waveRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.playBtn {
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #e8457c;
+  border-radius: 50%;
+}
+
+.wave {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 40px;
+}
+
+.wave span {
+  display: block;
+  flex: 1;
+  background-color: #e8457c;
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+.transcriptLabel {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #a89f96;
+}
+
+.line {
+  margin: 0 0 14px 0;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.65;
+  color: #f1e9df;
+}
+
+#credits {
+  padding: 16px;
+  font-size: 12px;
+  color: #77706a;
+  text-align: center;
+}
+
+/* scenes with a phone: text on the left, phone on the right, picture stays visible in the middle */
+.withPhone {
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.withPhone .panel {
+  max-width: 380px;
+}
+
+.withPhone .appphone {
+  margin: 0;
+  z-index: 2;
+}
+
+/* responsive */
+@media (max-width: 800px) {
+  .withPhone {
+    justify-content: center;
+  }
+  .withPhone .panel {
+    max-width: 580px;
+  }
+  .withPhone .appphone {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 50px;
+    letter-spacing: 5px;
+  }
+  h2 {
+    font-size: 34px;
+  }
+  .panel {
+    padding: 16px;
+  }
+  .hotspot {
+    font-size: 11px;
+  }
+  .lockTime {
+    font-size: 64px;
+  }
+}
+
+/* accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #grain, .glitch, .primary, .fog, .candlelit::after, .flicker, .doorbell {
+    animation: none;
+  }
+}

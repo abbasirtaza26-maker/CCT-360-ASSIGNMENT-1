@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leave at Door</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="grain"></div>
+
+<div id="hud">
+  <span class="hudItem">BALANCE <b id="hudBalance">$1239</b></span>
+</div>
+
+<!-- SCENE 1: THE APP -->
+<div class="scene" id="scene1">
+  <div class="intro">
+    <p class="kicker">AN INTERACTIVE HORROR STORY</p>
+    <h1 class="glitch">LEAVE AT DOOR</h1>
+    <p class="tagline">Four stars. One more order. Don't look inside.</p>
+    <p class="kicker">VOLUME UP. THIS STORY HAS SOUND.</p>
+  </div>
+
+  <div class="lockphone">
+    <div class="lockStatus"><span>11:48</span><span>9%</span></div>
+    <p class="lockDate">Friday, November 27</p>
+    <p class="lockTime">11:48</p>
+
+    <button class="lockNotif" id="nTuition" onclick="readNotif('tuition')">
+      <span class="nTop"><span>Student Accounts</span><span>now</span></span>
+      <b>Tuition payment overdue</b>
+    </button>
+    <button class="lockNotif" id="nRating" onclick="readNotif('rating')">
+      <span class="nTop"><span>onemore</span><span>2m ago</span></span>
+      <b>Your rating dropped to 4.88</b>
+    </button>
+    <button class="lockNotif" id="nFlight" onclick="readNotif('flight')">
+      <span class="nTop"><span>FareWatch</span><span>14m ago</span></span>
+      <b>Toronto to Lahore: $1,286</b>
+    </button>
+
+    <p id="notifDetail">Tap each notification to read it.</p>
+    <button class="primary big" onclick="startShift()">START SHIFT</button>
+  </div>
+
+  <div id="credits">
+    Photos: (images by Pixabay and google).<br>
+    Sound: doorbell and eerie music from Pixabay (artist names: Music by <a href="https://pixabay.com/users/lemonorangedang-56816886/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=572386">lemonorangedang</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=572386">Pixabay</a>).
+           (Music by <a href="https://pixabay.com/users/darkne-57828520/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=620036">Daniel Brooks</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=620036">Pixabay</a>)
+  </div>
+</div>
+
+<!-- SCENE 2: THE CAR -->
+<div class="scene" id="scene2">
+  <div class="stage withPhone" style="background-image:url('images/image1.jpg')">
+    <div class="panel">
+      <p class="chapter">CHAPTER 1</p>
+      <h2>The Car</h2>
+      <p>Your phone is mounted on the dash. The city slides by. Check the app before you take the order.</p>
+
+          </div>
+    <div class="appphone">
+      <div class="appTop">
+        <span class="logo">onemore</span>
+        <span class="ratingPill">&#9733; <b id="appRating">4.88</b></span>
+      </div>
+
+      <!-- TAB 1: ORDERS -->
+      <div id="appOrders">
+        <p class="appSmall">New order</p>
+        <p class="price">$48.00</p>
+        <p class="dish">Family Dinner (serves 7)</p>
+        <p class="addr">14 Hollow Crescent &middot; 3.1 km away</p>
+        <p class="appSmall">Customer note</p>
+        <p class="custNote">"Come in. Please. Alone."</p>
+        <button class="declineBtn" onclick="declineOrder()">Decline</button>
+        <button class="acceptBtn" onclick="acceptOrder()">Accept</button>
+        <p id="declineMsg" class="appMsg"></p>
+      </div>
+
+      <!-- TAB 2: BANK -->
+      <div id="appBank">
+        <p class="appSmall">Bank</p>
+        <p class="price">Checking</p>
+        <p id="balanceMsg" class="appMsg">Open this tab to see your balance.</p>
+      </div>
+
+      <!-- TAB 3: MESSAGES -->
+      <div id="appMessages">
+        <p class="appSmall">Messages &middot; Mom (voice notes, transcripts)</p>
+        <p class="bubble">
+          "Son, are you okay? Have you eaten? Don't work this late at night."<br>
+          (softer) "Dad asks me every day, 'Is he coming home for the holidays?' I tell him not to ask, that you're busy."<br>
+          (pause) "I cleaned your room. Just... because."
+        </p>
+        <p class="bubble">
+          "Son, tell me honestly, you're okay, right? It's been so many days since I heard your voice."<br>
+          "Dad said he'll send the money for the ticket this time, but I know you won't take it."<br>
+          (barely holding it together) "Just come home. I don't need anything. Just you."
+        </p>
+      </div>
+
+      <p id="appHint" class="appMsg"></p>
+
+      <div class="appTabs">
+        <button id="tabOrders" onclick="showTab('orders')">onemore</button>
+        <button id="tabBank" onclick="showTab('bank')">Bank</button>
+        <button id="tabMessages" onclick="showTab('messages')">Messages</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 3: THE HOUSE -->
+<div class="scene" id="scene3">
+  <div class="stage" style="background-image:url('images/image2.jpg')">
+    <div class="fog"></div>
+    <div class="panel">
+      <p class="chapter">CHAPTER 2</p>
+      <h2>The House</h2>
+      <p>Every porch light on the street is on, except this one. The door is open a crack.</p>
+      <button onclick="ringBell()">Ring the bell</button>
+      <button class="primary" onclick="enterHouse()">Push the door</button>
+      <p id="houseMsg" class="alert"></p>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 4: THE DINING ROOM -->
+<div class="scene" id="scene4">
+  <div class="stage candlelit" style="background-image:url('images/image3.jpg')">
+    <div id="darkness"></div>
+    <button class="hotspot" id="hsJackets" style="left:6%; top:32%" onclick="findClue('jackets')">Bag</button>
+    <button class="hotspot" id="hsPhones" style="left:38%; top:20%" onclick="findClue('phones')">Phone</button>
+    <button class="hotspot" id="hsPlates" style="left:58%; top:40%" onclick="findClue('plates')">Plate</button>
+    <button class="hotspot" id="hsBadge" style="left:22%; top:48%" onclick="findClue('badge')">Badge</button>
+    <button class="hotspot" id="hsHead" style="left:72%; top:10%; width:22%; height:34%; border:2px dashed #ffd27a; background-color:rgba(255,210,122,0.10)" onclick="findClue('head')">Look closer</button>
+    <div class="panel">
+      <p class="chapter">CHAPTER 3</p>
+      <h2>The Dining Room</h2>
+      <p class="hint">Move your mouse, or tap, to aim the light. Click anything that seems wrong.</p>
+      <p class="hint">Details found: <span id="clueCount">0/5</span></p>
+      <p id="clueText" class="clue">Candlelight only. A long table is set for a family dinner.</p>
+      <button class="primary" id="toLoop" onclick="goToScene(5)">The door clicks shut behind you</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 5: THE LOOP -->
+<div class="scene" id="scene5">
+  <div class="stage flicker withPhone" style="background-image:url('images/image4.jpg')">
+    <div class="panel">
+      <p class="chapter">CHAPTER 4</p>
+      <h2>The Loop</h2>
+      <p>The candles go out. When they relight, his chair is empty and you are sitting in it. Your phone buzzes.</p>
+
+          </div>
+    <div class="appphone">
+      <div class="appTop">
+        <span class="logo">onemore</span>
+        <span class="ratingPill" id="roleBadge">DRIVER</span>
+      </div>
+      <!-- DRIVER VIEW (before the switch) -->
+      <div id="driverView">
+        <p class="appSmall">Delivery complete</p>
+        <p class="dish">Family Dinner (serves 7)</p>
+        <p class="addr">14 Hollow Crescent &middot; Delivered</p>
+        <p class="appSmall">1 new notification</p>
+        <p class="custNote">Account update</p>
+        <button class="acceptBtn wide" onclick="openUpdate()">Open</button>
+      </div>
+
+      <!-- CUSTOMER VIEW (after the switch) -->
+      <div id="customerView" style="display:none">
+        <p class="appSmall">Profile updated</p>
+        <p class="custNote">DRIVER &rarr; CUSTOMER</p>
+        <p class="appSmall">Your order &middot; Family Dinner (serves 7)</p>
+        <p class="addr">14 Hollow Crescent &middot; Finding a driver...</p>
+        <p id="dayMsg" class="noteBox">You can't leave. All you can do is wait.</p>
+        <button class="acceptBtn wide" id="waitBtn" onclick="waitDay()">Wait</button>
+        <div id="noteArea" style="display:none">
+          <p class="appSmall">Note to driver</p>
+          <p id="noteBox" class="noteBox">Tap the keys to type a warning...</p>
+          <p id="noteResult" class="custNote"></p>
+        </div>
+      </div>
+      <div id="keyboard" style="display:none">
+        <div class="kbRow kbRow1">
+          <button class="key" onclick="typeKey('q')">q</button>
+          <button class="key" onclick="typeKey('w')">w</button>
+          <button class="key" onclick="typeKey('e')">e</button>
+          <button class="key" onclick="typeKey('r')">r</button>
+          <button class="key" onclick="typeKey('t')">t</button>
+          <button class="key" onclick="typeKey('y')">y</button>
+          <button class="key" onclick="typeKey('u')">u</button>
+          <button class="key" onclick="typeKey('i')">i</button>
+          <button class="key" onclick="typeKey('o')">o</button>
+          <button class="key" onclick="typeKey('p')">p</button>
+        </div>
+        <div class="kbRow kbRow2">
+          <button class="key" onclick="typeKey('a')">a</button>
+          <button class="key" onclick="typeKey('s')">s</button>
+          <button class="key" onclick="typeKey('d')">d</button>
+          <button class="key" onclick="typeKey('f')">f</button>
+          <button class="key" onclick="typeKey('g')">g</button>
+          <button class="key" onclick="typeKey('h')">h</button>
+          <button class="key" onclick="typeKey('j')">j</button>
+          <button class="key" onclick="typeKey('k')">k</button>
+          <button class="key" onclick="typeKey('l')">l</button>
+        </div>
+        <div class="kbRow kbRow3">
+          <button class="key" onclick="typeKey('z')">z</button>
+          <button class="key" onclick="typeKey('x')">x</button>
+          <button class="key" onclick="typeKey('c')">c</button>
+          <button class="key" onclick="typeKey('v')">v</button>
+          <button class="key" onclick="typeKey('b')">b</button>
+          <button class="key" onclick="typeKey('n')">n</button>
+          <button class="key" onclick="typeKey('m')">m</button>
+        </div>
+        <div class="kbRow">
+          <button class="key" onclick="clearNote()">clear</button>
+          <button class="key spaceKey" onclick="typeKey(' ')">space</button>
+          <button class="key sendKey" onclick="sendNote()">send</button>
+        </div>
+      </div>
+      <p id="driverMsg" class="appMsg"></p>
+      <button class="declineBtn wide" id="toEnd" onclick="goToScene(6)">Continue</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE 6: THE END -->
+<div class="scene" id="scene6">
+  <div class="stage ending" style="background-image:url('images/image5.jpg')">
+    <div class="panel">
+      <p class="chapter">EPILOGUE</p>
+      <h2>Days Later</h2>
+      <p>Reminder: Your flight departs today at 9:40 PM.</p>
+      <p>Your driver is 2 minutes away.</p>
+      <p class="doorbell">The doorbell rings.</p>
+      <div class="voiceCard">
+        <div class="voiceHead">
+          <span class="avatar">M</span>
+          <span class="voiceWho"><b>Mom</b><br><i>Voice note &middot; 0:34</i></span>
+        </div>
+        <div class="waveRow">
+          <span class="playBtn">&#9654;</span>
+          <div class="wave"><span style="height:30%"></span><span style="height:55%"></span><span style="height:40%"></span><span style="height:75%"></span><span style="height:50%"></span><span style="height:90%"></span><span style="height:35%"></span><span style="height:65%"></span><span style="height:45%"></span><span style="height:80%"></span><span style="height:30%"></span><span style="height:60%"></span><span style="height:95%"></span><span style="height:50%"></span><span style="height:35%"></span><span style="height:70%"></span><span style="height:45%"></span><span style="height:85%"></span><span style="height:40%"></span><span style="height:55%"></span><span style="height:30%"></span><span style="height:65%"></span><span style="height:50%"></span><span style="height:75%"></span><span style="height:35%"></span><span style="height:45%"></span><span style="height:30%"></span><span style="height:40%"></span></div>
+        </div>
+        <p class="transcriptLabel">TRANSCRIPT</p>
+        <p class="line">"Son... we went to the airport. We stood at the gate for three hours. You didn't come."</p>
+        <p class="line">(long pause, quiet) "I'm not angry. Just tell me you're okay. Just that."</p>
+      </div>
+
+      <p id="summary" class="alert"></p>
+      <button onclick="restart()">Start over</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOUND -->
+<audio id="music" src="audio/audio1.mp3" loop></audio>
+<audio id="bell" src="audio/audio2.mp3"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
